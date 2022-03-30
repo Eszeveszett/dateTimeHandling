@@ -51,65 +51,68 @@ namespace dateTimeHandling
 
         private void BTN_Change_Click(object sender, RoutedEventArgs e)
         {
-            int ChangedTimeValue = 0;
-            TBO_ChangedDate.Text = DateTime.Now.ToString();
+            #region órapercmásodpercTeszt
+            //int ChangedTimeValue = 0;
+            //TBO_ChangedDate.Text = DateTime.Now.ToString();
 
-            if (year != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Year))
-            {
-                year++;
-            }
-            else
-            {
-                if (month != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Month))
-                {
-                    month++;
-                }
-                else
-                {
-                    if (day != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Day))
-                    {
-                        day++;
-                    }
-                    else
-                    {
-                        if (hour != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Hour))
-                        {
-                            ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Hour) - hour;
-                            hour += ChangedTimeValue;
-                            if (hour > 59)
-                            {
-                                hour = DateTime.Now.Hour;
-                            }
-                        }
-                        else
-                        {
-                            if (minute != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Minute))
-                            {
-                                ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Minute) - minute;
-                                minute += ChangedTimeValue;
-                                if (minute > 59)
-                                {
-                                    minute = DateTime.Now.Minute;
-                                }
-                            }
-                            else
-                            {
-                                if (second != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Second))
-                                {
-                                    ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Second)-second;
-                                    second += ChangedTimeValue;
-                                    if (second > 59)
-                                    {
-                                        second = DateTime.Now.Second;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            //if (year != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Year))
+            //{
+            //    year++;
+            //}
+            //else
+            //{
+            //    if (month != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Month))
+            //    {
+            //        month++;
+            //    }
+            //    else
+            //    {
+            //        if (day != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Day))
+            //        {
+            //            day++;
+            //        }
+            //        else
+            //        {
+            //            if (hour != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Hour))
+            //            {
+            //                ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Hour) - hour;
+            //                hour += ChangedTimeValue;
+            //                if (hour > 59)
+            //                {
+            //                    hour = DateTime.Now.Hour;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                if (minute != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Minute))
+            //                {
+            //                    ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Minute) - minute;
+            //                    minute += ChangedTimeValue;
+            //                    if (minute > 59)
+            //                    {
+            //                        minute = DateTime.Now.Minute;
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    if (second != Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Second))
+            //                    {
+            //                        ChangedTimeValue = Convert.ToInt32(Convert.ToDateTime(TBO_ChangedDate.Text).Second)-second;
+            //                        second += ChangedTimeValue;
+            //                        if (second > 59)
+            //                        {
+            //                            second = DateTime.Now.Second;
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
-            TBO_EndDate.Text = year.ToString() +" "+ month.ToString() +" "+ day.ToString() +" "+ hour.ToString() + " " + minute.ToString() + " " + second.ToString();
+            //TBO_EndDate.Text = year.ToString() +" "+ month.ToString() +" "+ day.ToString() +" "+ hour.ToString() + " " + minute.ToString() + " " + second.ToString();
+            #endregion
+
 
             if (string.IsNullOrEmpty(TBO_StartYear.Text))
             {
@@ -127,19 +130,22 @@ namespace dateTimeHandling
                     if (string.IsNullOrEmpty(TBO_ChangedMonth.Text))
                     {
                         TBO_ChangedMonth.Focus();
+                        TBO_ChangedMonth.BorderBrush = Brushes.Red;
                     }
                     else
                     {
+                        
+                        TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
                         if (string.IsNullOrEmpty(TBO_ChangedDay.Text))
                         {
-
+                            TBO_ChangedDay.Focus();
+                            TBO_ChangedDay.BorderBrush = Brushes.Red;
                         }
                         else
                         {
-                            /*Számolás hónapokkal*/
                             if (Convert.ToInt32(TBO_StartMonth.Text) + Convert.ToInt32(TBO_ChangedMonth.Text) <= DateTime.MaxValue.Month)
                             {
-                                TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
+                                //TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
                                 if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
                                 {
                                     TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
