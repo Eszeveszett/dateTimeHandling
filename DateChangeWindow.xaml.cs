@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +36,17 @@ namespace dateTimeHandling
             hour = DateTime.Now.Hour;
             minute = DateTime.Now.Minute;
             second = DateTime.Now.Second;
+        }
+
+        private void StringToIntValidation(object sender, TextCompositionEventArgs e)
+        {
+            Regex regexValidator = new Regex("[^0-9]+");
+            e.Handled = regexValidator.IsMatch(e.Text);
+
+            // "[^0-9]+" : Szám "[^a-z]+" : Az angol ABC kisbetűi "[^A-Z]+" : Az angol ABC nagybetűi
+            // "[^A-z]+" : Az angol ABC kis és nagybetűi
+            //  Függően a regexValidator példányosításánál a "^" elhelyezkedésétől (Szögletes zárójelen belül vagy kívül), jelentheti
+            //  hogy (Belül)csak az  adott karakterek vihetőek be, vagy (Kívül) csak az adott karakterek NEM vihetőek be
         }
 
         private void BTN_Change_Click(object sender, RoutedEventArgs e)
@@ -107,33 +119,69 @@ namespace dateTimeHandling
             {
                 if (string.IsNullOrEmpty(TBO_ChangedYear.Text))
                 {
-                    DPI_ChangedDate.IsDropDownOpen= true;
+                    TBO_ChangedYear.Text = DateTime.Now.Year.ToString();
+                    //DPI_ChangedDate.IsDropDownOpen= true;
                 }
                 else
                 {
-                    //TBO_EndYear.Text = (Convert.ToInt32(TBO_ChangedYear.Text) - Convert.ToInt32(TBO_StartYear.Text)).ToString();
-
-                    /*Számolás hónapokkal*/
-                    if (Convert.ToInt32(TBO_StartMonth.Text) + Convert.ToInt32(TBO_ChangedMonth.Text) <= DateTime.MaxValue.Month)
+                    if (string.IsNullOrEmpty(TBO_ChangedMonth.Text))
                     {
-                        TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
-                        if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
-                        {
-                            TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
-                        }
+
                     }
                     else
                     {
-                        if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                        if (string.IsNullOrEmpty(TBO_ChangedDay.Text))
                         {
-                            
-                            TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+
                         }
                         else
                         {
-                            TBO_EndMonth.Text = (Convert.ToInt32(TBO_EndMonth.Text) + 1).ToString();
+                            /*Számolás hónapokkal*/
+                            if (Convert.ToInt32(TBO_StartMonth.Text) + Convert.ToInt32(TBO_ChangedMonth.Text) <= DateTime.MaxValue.Month)
+                            {
+                                TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
+                                if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                                {
+                                    TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+                                }
+                            }
+                            else
+                            {
+                                if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                                {
+
+                                    TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+                                }
+                                else
+                                {
+                                    TBO_EndMonth.Text = (Convert.ToInt32(TBO_EndMonth.Text) + 1).ToString();
+                                }
+                            }
                         }
                     }
+                    //TBO_EndYear.Text = (Convert.ToInt32(TBO_ChangedYear.Text) - Convert.ToInt32(TBO_StartYear.Text)).ToString();
+
+                    /*Számolás hónapokkal*/
+                    //if (Convert.ToInt32(TBO_StartMonth.Text) + Convert.ToInt32(TBO_ChangedMonth.Text) <= DateTime.MaxValue.Month)
+                    //{
+                    //    TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
+                    //    if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                    //    {
+                    //        TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                    //    {
+                            
+                    //        TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+                    //    }
+                    //    else
+                    //    {
+                    //        TBO_EndMonth.Text = (Convert.ToInt32(TBO_EndMonth.Text) + 1).ToString();
+                    //    }
+                    //}
                     
                 }
             }
@@ -148,12 +196,17 @@ namespace dateTimeHandling
 
         private void DPI_ChangedDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            TBO_ChangedYear.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Year.ToString();
-            TBO_ChangedMonth.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Month.ToString();
-            TBO_ChangedDay.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Day.ToString();
+            //TBO_ChangedYear.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Year.ToString();
+            //TBO_ChangedMonth.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Month.ToString();
+            //TBO_ChangedDay.Text = Convert.ToDateTime(DPI_ChangedDate.Text).Day.ToString();
         }
 
         private void BTN_Quit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BTN_Escape_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             Application.Current.MainWindow.Close();

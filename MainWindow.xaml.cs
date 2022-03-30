@@ -20,7 +20,7 @@ namespace dateTimeHandling
     /// </summary>
     public partial class MainWindow : Window
     {
-        DateChangeWindow DCW = new DateChangeWindow();
+        //DateChangeWindow DCW = new DateChangeWindow();
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace dateTimeHandling
             //DateTime most = DateTime.Now;
 
             TBO_ActualDate.Text = DateTime.Now.Date.ToString();
-
+            DateChangeWindow DCW = new DateChangeWindow();
             DCW.ShowDialog();
         }
 
@@ -48,7 +48,8 @@ namespace dateTimeHandling
 
         private void BTN_DateChange_Click(object sender, RoutedEventArgs e)
         {
-            //DCW.ShowDialog();
+            DateChangeWindow DCW = new DateChangeWindow();
+            DCW.ShowDialog();
         }
 
         private void BTN_Close_Click(object sender, RoutedEventArgs e)

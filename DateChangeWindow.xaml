@@ -48,18 +48,21 @@
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Year" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedYear" Width="200"/>
+                <TextBlock x:Name="TBO_ChangedYear" 
+                    PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Month" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedMonth" Width="200"/>
+                <TextBlock x:Name="TBO_ChangedMonth" 
+                    PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Day" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedDay" Width="200"/>
+                <TextBlock x:Name="TBO_ChangedDay" 
+                    PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
-            <DatePicker x:Name="DPI_ChangedDate" 
-                SelectedDateChanged="DPI_ChangedDate_SelectedDateChanged"/>
+            <!--<DatePicker x:Name="DPI_ChangedDate" 
+                SelectedDateChanged="DPI_ChangedDate_SelectedDateChanged"/>-->
             <Button x:Name="BTN_Change" Click="BTN_Change_Click"
                     Content="Számol"/>
         </StackPanel>
@@ -95,6 +98,8 @@
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Button x:Name="BTN_Quit" Click="BTN_Quit_Click"
                 Content="Escape from Data Change Window"/>
+            <Button x:Name="BTN_Escape" Click="BTN_Escape_Click"
+                Content="Escape from Application"/>
         </StackPanel>
         
     </Grid>
