@@ -30,12 +30,12 @@ namespace dateTimeHandling
         {
             InitializeComponent();
             TBO_Date.Text = DateTime.Now.ToString();
-            year = DateTime.Now.Year;
-            month = DateTime.Now.Month;
-            day = DateTime.Now.Day;
-            hour = DateTime.Now.Hour;
-            minute = DateTime.Now.Minute;
-            second = DateTime.Now.Second;
+            //year = DateTime.Now.Year;
+            //month = DateTime.Now.Month;
+            //day = DateTime.Now.Day;
+            //hour = DateTime.Now.Hour;
+            //minute = DateTime.Now.Minute;
+            //second = DateTime.Now.Second;
         }
 
         private void StringToIntValidation(object sender, TextCompositionEventArgs e)
@@ -126,7 +126,7 @@ namespace dateTimeHandling
                 {
                     if (string.IsNullOrEmpty(TBO_ChangedMonth.Text))
                     {
-
+                        TBO_ChangedMonth.Focus();
                     }
                     else
                     {

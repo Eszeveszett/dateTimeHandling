@@ -48,17 +48,17 @@
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Year" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedYear" 
+                <TextBox x:Name="TBO_ChangedYear" 
                     PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Month" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedMonth" 
+                <TextBox x:Name="TBO_ChangedMonth" 
                     PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Day" Width="50"/>
-                <TextBlock x:Name="TBO_ChangedDay" 
+                <TextBox x:Name="TBO_ChangedDay" 
                     PreviewTextInput="StringToIntValidation" Width="200"/>
             </WrapPanel>
             <!--<DatePicker x:Name="DPI_ChangedDate" 
