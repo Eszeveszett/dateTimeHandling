@@ -1,0 +1,101 @@
+﻿<Window x:Class="dateTimeHandling.DateChangeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dateTimeHandling"
+        mc:Ignorable="d"
+        Title="DateChangeWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label Content="Folyamat kezdésének dátuma"/>
+            <WrapPanel>
+                <Label Content="Date" Width="50"/>
+                <TextBlock x:Name="TBO_Date" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Year" Width="50"/>
+                <TextBlock x:Name="TBO_StartYear" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Month" Width="50"/>
+                <TextBlock x:Name="TBO_StartMonth" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Day" Width="50"/>
+                <TextBlock x:Name="TBO_StartDay" Width="200"/>
+            </WrapPanel>
+            <DatePicker x:Name="DPI_StartDate" 
+                SelectedDateChanged="DPI_StartDate_SelectedDateChanged"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Content="Folyamat elvégzéséhez szükséges becsült idő"/>
+            <WrapPanel>
+                <Label Content="Date" Width="50"/>
+                <TextBlock x:Name="TBO_ChangedDate" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Year" Width="50"/>
+                <TextBlock x:Name="TBO_ChangedYear" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Month" Width="50"/>
+                <TextBlock x:Name="TBO_ChangedMonth" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Day" Width="50"/>
+                <TextBlock x:Name="TBO_ChangedDay" Width="200"/>
+            </WrapPanel>
+            <DatePicker x:Name="DPI_ChangedDate" 
+                SelectedDateChanged="DPI_ChangedDate_SelectedDateChanged"/>
+            <Button x:Name="BTN_Change" Click="BTN_Change_Click"
+                    Content="Számol"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Label Content="Folyamat befejezésének becsült dátuma"/>
+            <WrapPanel>
+                <Label Content="Date" Width="50"/>
+                <TextBlock x:Name="TBO_EndDate" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Year" Width="50"/>
+                <TextBlock x:Name="TBO_EndYear" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Month" Width="50"/>
+                <TextBlock x:Name="TBO_EndMonth" Width="200"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Day" Width="50"/>
+                <TextBlock x:Name="TBO_EndDay" Width="200"/>
+            </WrapPanel>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Button x:Name="BTN_Quit" Click="BTN_Quit_Click"
+                Content="Escape from Data Change Window"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

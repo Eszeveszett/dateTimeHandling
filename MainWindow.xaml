@@ -1,0 +1,44 @@
+﻿<Window x:Class="dateTimeHandling.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dateTimeHandling"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="Purple">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="5" Background="GreenYellow">
+            <Label Content="Az aktuális dátum:"/>
+            <TextBox x:Name="TBO_ActualDate" Margin="5"/>
+            <Button x:Name="BTN_Refresh" Click="BTN_Refresh_Click" 
+                    Content="Refresh"/>
+            <Button x:Name="BTN_DateChange" Click="BTN_DateChange_Click"
+                    Content="Date Change"/>
+            <Button x:Name="BTN_Close" Click="BTN_Close_Click" 
+                    Content="Close"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="5" Background="DodgerBlue">
+            <Label Content="A jelenlegi évszám"/>
+            <TextBox x:Name="TBO_ActualYear" Margin="5"/>
+            <Label Content="A jelenlegi hónap"/>
+            <TextBox x:Name="TBO_ActualMonth" Margin="5"/>
+            <TextBox x:Name="TBO_ActualMonthString" Margin="5"/>
+            <Label Content="A jelenlegi nap"/>
+            <TextBox x:Name="TBO_ActualDay" Margin="5"/>
+            <TextBox x:Name="TBO_ActualDayString" Margin="5"/>
+            <Label Content="Óra"/>
+            <TextBox x:Name="TBO_ActualHour" Margin="5"/>
+            <Label Content="Perc"/>
+            <TextBox x:Name="TBO_ActualMinute" Margin="5"/>
+            <Label Content="Másodperc"/>
+            <TextBox x:Name="TBO_ActualSecond" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
