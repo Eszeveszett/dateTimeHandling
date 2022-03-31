@@ -26,6 +26,9 @@ namespace dateTimeHandling
         int hour;
         int minute;
         int second;
+
+        DateTime actualStartDate;
+        DateTime actualEndDate;
         public DateChangeWindow()
         {
             InitializeComponent();
@@ -36,6 +39,19 @@ namespace dateTimeHandling
             //hour = DateTime.Now.Hour;
             //minute = DateTime.Now.Minute;
             //second = DateTime.Now.Second;
+
+            TBO_DatetimeOne.Text = DateTime.Now.ToString();
+            TBO_DatetimeTwo.Text = DateTime.MinValue.ToString();
+            TBO_DatetimeThree.Text = DateTime.MaxValue.ToString();
+            TBO_DatetimeFour.Text = DateTime.Now.AddDays(2).ToString();
+            TBO_DatetimeFive.Text = DateTime.Now.AddDays(97).ToString();
+            TBO_DatetimeSix.Text = DateTime.Now.DayOfWeek.ToString();
+            TBO_DatetimeSeven.Text = DateTime.Now.DayOfYear.ToString();
+            TBO_DatetimeEight.Text = DateTime.Now.TimeOfDay.ToString();
+
+            TBO_Datetime3.Text = DateTime.DaysInMonth(2022,3).ToString();
+
+            
         }
 
         private void StringToIntValidation(object sender, TextCompositionEventArgs e)
@@ -113,6 +129,7 @@ namespace dateTimeHandling
             //TBO_EndDate.Text = year.ToString() +" "+ month.ToString() +" "+ day.ToString() +" "+ hour.ToString() + " " + minute.ToString() + " " + second.ToString();
             #endregion
 
+            
 
             if (string.IsNullOrEmpty(TBO_StartYear.Text))
             {
@@ -122,48 +139,101 @@ namespace dateTimeHandling
             {
                 if (string.IsNullOrEmpty(TBO_ChangedYear.Text))
                 {
-                    TBO_ChangedYear.Text = DateTime.Now.Year.ToString();
+                    TBO_ChangedYear.Text = DateTime.Now.ToString("yyyy");
+                    TBO_EndYear.Text = DateTime.Now.ToString("yyyy");
                     //DPI_ChangedDate.IsDropDownOpen= true;
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(TBO_ChangedMonth.Text))
+                    if (string.IsNullOrEmpty(TBO_ChangedMonth.Text) && string.IsNullOrEmpty(TBO_ChangedDay.Text))
                     {
-                        TBO_ChangedMonth.Focus();
                         TBO_ChangedMonth.BorderBrush = Brushes.Red;
+                        TBO_ChangedDay.BorderBrush = Brushes.Red;
+                        TBO_Datetime1.Text = actualStartDate.ToString();
                     }
                     else
                     {
-                        
-                        TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
-                        if (string.IsNullOrEmpty(TBO_ChangedDay.Text))
+                        /*  Először nézzük a hónapot    */
+                        //if (!string.IsNullOrEmpty(TBO_ChangedMonth.Text) /*|| string.IsNullOrEmpty(TBO_ChangedDay.Text)*/)
+                        //{
+                        //    actualEndDate = actualStartDate.AddMonths(Convert.ToInt32(TBO_ChangedMonth.Text));
+                        //    TBO_EndMonth.Text = actualEndDate.Month.ToString();
+                        //    /*TBO_EndDay.Text = actualEndDate.Day.ToString();*/
+                        //}
+                        /*  Aztán a napot   */
+                        if (!string.IsNullOrEmpty(TBO_ChangedMonth.Text) && !string.IsNullOrEmpty(TBO_ChangedDay.Text))
                         {
-                            TBO_ChangedDay.Focus();
-                            TBO_ChangedDay.BorderBrush = Brushes.Red;
-                        }
-                        else
-                        {
-                            if (Convert.ToInt32(TBO_StartMonth.Text) + Convert.ToInt32(TBO_ChangedMonth.Text) <= DateTime.MaxValue.Month)
-                            {
-                                //TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
-                                if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
-                                {
-                                    TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
-                                }
-                            }
-                            else
-                            {
-                                if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
-                                {
+                            actualEndDate = actualStartDate.AddDays(Convert.ToInt32(TBO_ChangedDay.Text));
+                            actualEndDate = actualStartDate.AddMonths(Convert.ToInt32(TBO_ChangedMonth.Text));
+                            TBO_EndMonth.Text = actualEndDate.Month.ToString();
+                            TBO_EndDay.Text = actualEndDate.Day.ToString();
 
-                                    TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
-                                }
-                                else
-                                {
-                                    TBO_EndMonth.Text = (Convert.ToInt32(TBO_EndMonth.Text) + 1).ToString();
-                                }
+
+
+                            if (DateTime.DaysInMonth(Convert.ToInt32(TBO_EndYear.Text), Convert.ToInt32(TBO_EndMonth.Text)) <
+                                Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text))
+                            {
+                                day = Convert.ToInt32(TBO_ChangedDay.Text) - 
+                                    (DateTime.DaysInMonth(Convert.ToInt32(TBO_EndYear.Text), Convert.ToInt32(TBO_EndMonth.Text)) - Convert.ToInt32(TBO_StartDay.Text));
+                                //TBO_EndMonth.Text = actualEndDate.AddMonths(1).Month.ToString();
+                                TBO_EndDay.Text = day.ToString();
+                                //TBO_Datetime1.Text = TBO_ChangedDay.Text;
+                                //TBO_Datetime2.Text = DateTime.DaysInMonth(Convert.ToInt32(TBO_EndYear.Text), Convert.ToInt32(TBO_EndMonth.Text)).ToString();
+
+                                TBO_Datetime6.Text = day.ToString();
                             }
+                            //TBO_Datetime4.BorderBrush = Brushes.Red;
+                            //TBO_Datetime5.BorderBrush = Brushes.Red;
+                            //TBO_Datetime4.Text = DateTime.DaysInMonth(Convert.ToInt32(TBO_EndYear.Text), Convert.ToInt32(TBO_EndMonth.Text)).ToString();
+                            //TBO_Datetime5.Text = (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text)).ToString();
                         }
+                        /*  Aztán a kettőt egyben   */
+                        //else if (!string.IsNullOrEmpty(TBO_ChangedMonth.Text) && !string.IsNullOrEmpty(TBO_ChangedDay.Text))
+                        //{
+                            
+                            
+                            //actualEndDate = actualStartDate.AddMonths(Convert.ToInt32(TBO_ChangedMonth.Text));
+                            //actualEndDate = actualStartDate.AddDays(Convert.ToInt32(TBO_ChangedDay.Text));
+                            //TBO_EndMonth.Text = actualEndDate.Month.ToString();
+                            //TBO_EndDay.Text = actualEndDate.Day.ToString();
+                        //}
+                        //TBO_Datetime3.Text = "Hónapok";
+                        //
+                        //if (!string.IsNullOrEmpty(TBO_ChangedMonth.Text))
+                        //{
+                        //    //actualEndDate = Convert.ToDateTime(Convert.ToInt32(actualStartDate.Month) + Convert.ToDateTime(TBO_ChangedMonth.Text).Month);
+                        //    TBO_Datetime2.Text = actualEndDate.ToString();
+                        //}
+                        ////TBO_EndMonth.Text = (Convert.ToInt32(TBO_ChangedMonth.Text) - Convert.ToInt32(TBO_StartMonth.Text)).ToString();
+                        //if (string.IsNullOrEmpty(TBO_ChangedDay.Text))
+                        //{
+                        //    TBO_ChangedDay.Focus();
+                        //    TBO_ChangedDay.BorderBrush = Brushes.Red;
+                        //}
+                        //else
+                        //{
+                        //    TBO_Datetime1.Text = actualStartDate.AddDays(Convert.ToInt32(TBO_ChangedDay.Text)).ToString();
+                        //    if (Convert.ToInt32(TBO_StartMonth.Text) != Convert.ToInt32(TBO_ChangedMonth.Text))
+                        //    {
+                        //        TBO_EndMonth.Text = actualStartDate.AddMonths(Convert.ToInt32(TBO_ChangedMonth.Text)).ToString("MM");
+                        //        if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                        //        {
+                        //            TBO_EndDay.Text = actualStartDate.AddDays(Convert.ToInt32(TBO_ChangedDay.Text)).ToString("dd");
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        if (Convert.ToInt32(TBO_StartDay.Text) + Convert.ToInt32(TBO_ChangedDay.Text) <= DateTime.MaxValue.Day)
+                        //        {
+
+                        //            TBO_EndDay.Text = (Convert.ToInt32(TBO_ChangedDay.Text) - Convert.ToInt32(TBO_StartDay.Text)).ToString();
+                        //        }
+                        //        else
+                        //        {
+                        //            TBO_EndMonth.Text = (Convert.ToInt32(TBO_EndMonth.Text) + 1).ToString();
+                        //        }
+                        //    }
+                        //}
                     }
                     //TBO_EndYear.Text = (Convert.ToInt32(TBO_ChangedYear.Text) - Convert.ToInt32(TBO_StartYear.Text)).ToString();
 
@@ -195,9 +265,11 @@ namespace dateTimeHandling
 
         private void DPI_StartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            TBO_StartYear.Text = Convert.ToDateTime(DPI_StartDate.Text).Year.ToString();
-            TBO_StartMonth.Text = Convert.ToDateTime(DPI_StartDate.Text).Month.ToString();
-            TBO_StartDay.Text = Convert.ToDateTime(DPI_StartDate.Text).Day.ToString();
+            actualStartDate = DPI_StartDate.SelectedDate.Value;
+            TBO_Datetime8.Text = actualStartDate.ToString("yyyy MM dd");
+            TBO_StartYear.Text = Convert.ToDateTime(DPI_StartDate.Text).ToString("yyyy");
+            TBO_StartMonth.Text = Convert.ToDateTime(DPI_StartDate.Text).ToString("MM");
+            TBO_StartDay.Text = Convert.ToDateTime(DPI_StartDate.Text).ToString("dd");
         }
 
         private void DPI_ChangedDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dateTimeHandling"
         mc:Ignorable="d"
-        Title="DateChangeWindow" Height="450" Width="800"
+        Title="DateChangeWindow" Height="600" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,26 +18,67 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
             <Label Content="Folyamat kezdésének dátuma"/>
             <WrapPanel>
                 <Label Content="Date" Width="50"/>
                 <TextBlock x:Name="TBO_Date" Width="200"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Year" Width="50"/>
-                <TextBlock x:Name="TBO_StartYear" Width="200"/>
+                <Label Content="Start Year" Width="75"/>
+                <TextBlock x:Name="TBO_StartYear" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Month" Width="50"/>
-                <TextBlock x:Name="TBO_StartMonth" Width="200"/>
+                <Label Content="Start Month" Width="75"/>
+                <TextBlock x:Name="TBO_StartMonth" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Day" Width="50"/>
-                <TextBlock x:Name="TBO_StartDay" Width="200"/>
+                <Label Content="Start Day" Width="75"/>
+                <TextBlock x:Name="TBO_StartDay" Width="100"/>
             </WrapPanel>
             <DatePicker x:Name="DPI_StartDate" 
                 SelectedDateChanged="DPI_StartDate_SelectedDateChanged"/>
+            <Separator/>
+            
+            <StackPanel>
+                <Label Content="Datetime.Now"/>
+                <TextBox x:Name="TBO_DatetimeOne"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Datetime.MinValue"/>
+                <TextBox x:Name="TBO_DatetimeTwo"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Datetime.MaxValue"/>
+                <TextBox x:Name="TBO_DatetimeThree"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Datetime.Now.AddDays(2)"/>
+                <TextBox x:Name="TBO_DatetimeFour"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="DateTime.Now.AddDays(97)"/>
+                <TextBox x:Name="TBO_DatetimeFive"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="DateTime.Now.DayOfWeek"/>
+                <TextBox x:Name="TBO_DatetimeSix"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="DateTime.Now.DayOfYear"/>
+                <TextBox x:Name="TBO_DatetimeSeven"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="DateTime.Now.TimeOfDay"/>
+                <TextBox x:Name="TBO_DatetimeEight"/>
+            </StackPanel>
         </StackPanel>
         
         <StackPanel Grid.Row="0" Grid.Column="1">
@@ -47,24 +88,60 @@
                 <TextBlock x:Name="TBO_ChangedDate" Width="200"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Year" Width="50"/>
+                <Label Content="Changed Year" Width="100"/>
                 <TextBox x:Name="TBO_ChangedYear" 
-                    PreviewTextInput="StringToIntValidation" Width="200"/>
+                    PreviewTextInput="StringToIntValidation" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Month" Width="50"/>
+                <Label Content="Changed Month" Width="100"/>
                 <TextBox x:Name="TBO_ChangedMonth" 
-                    PreviewTextInput="StringToIntValidation" Width="200"/>
+                    PreviewTextInput="StringToIntValidation" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Day" Width="50"/>
+                <Label Content="Changed Day" Width="100"/>
                 <TextBox x:Name="TBO_ChangedDay" 
-                    PreviewTextInput="StringToIntValidation" Width="200"/>
+                    PreviewTextInput="StringToIntValidation" Width="100"/>
             </WrapPanel>
             <!--<DatePicker x:Name="DPI_ChangedDate" 
                 SelectedDateChanged="DPI_ChangedDate_SelectedDateChanged"/>-->
             <Button x:Name="BTN_Change" Click="BTN_Change_Click"
                     Content="Számol"/>
+            <Separator/>
+            
+            <StackPanel>
+                <Label Content="Actual Start Date"/>
+                <TextBox x:Name="TBO_Datetime1"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Actual End Date"/>
+                <TextBox x:Name="TBO_Datetime2"/>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="DateTime.DaysInMonth(2022,3)"/>
+                <TextBox x:Name="TBO_Datetime3"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBox x:Name="TBO_Datetime4"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBox x:Name="TBO_Datetime5"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBox x:Name="TBO_Datetime6"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBox x:Name="TBO_Datetime7"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBox x:Name="TBO_Datetime8"/>
+            </StackPanel>
         </StackPanel>
         
         <StackPanel Grid.Row="0" Grid.Column="2">
@@ -74,16 +151,16 @@
                 <TextBlock x:Name="TBO_EndDate" Width="200"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Year" Width="50"/>
-                <TextBlock x:Name="TBO_EndYear" Width="200"/>
+                <Label Content="End Year" Width="75"/>
+                <TextBlock x:Name="TBO_EndYear" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Month" Width="50"/>
-                <TextBlock x:Name="TBO_EndMonth" Width="200"/>
+                <Label Content="End Month" Width="75"/>
+                <TextBlock x:Name="TBO_EndMonth" Width="100"/>
             </WrapPanel>
             <WrapPanel>
-                <Label Content="Day" Width="50"/>
-                <TextBlock x:Name="TBO_EndDay" Width="200"/>
+                <Label Content="End Day" Width="75"/>
+                <TextBlock x:Name="TBO_EndDay" Width="100"/>
             </WrapPanel>
         </StackPanel>
         
